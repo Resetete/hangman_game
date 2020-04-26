@@ -12,11 +12,22 @@ module Hangman
 HANG
 
     ALIVE = <<WIN
-
-  (•_•)
-  <)  )╯
-  /   \\
+    (•_•)
+    <)  )╯
+    /   \\
 WIN
+
+  DANCEARM = <<DANCEARM
+   \\(•_•)
+     (  (>
+     /  \\
+DANCEARM
+
+BOTHARMS = <<BOTHARMS
+    (•_•)
+    <)  )>
+     /  \\
+BOTHARMS
 
     OBFUSCATION_CHAR = "👾"
 

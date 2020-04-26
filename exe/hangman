@@ -6,5 +6,5 @@ if (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
   $stdout.sync = true
 end
 
-game = Hangman::Game.new
-game.play
+game = Hangman::Game.new # go into hangman module and then class object.new
+game.play # call the function play
