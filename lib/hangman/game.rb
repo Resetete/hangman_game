@@ -10,8 +10,15 @@ module Hangman
     end
 
     def play
+      Signal.trap('SIGINT') do # if someone enteres CTRL+C then the program is exited and goodbye printed
+        puts "\nGoodbye"
+        exit
+      end
+
       Graphics.clear_screen
       puts 'Guess this word: ' + Graphics.obfuscate_word(word, '')
+
+      puts 'Exit game with CTRL+C'
 
       while true
         print "[#{chances - wrong_tries} chances left]: "
@@ -26,25 +33,27 @@ module Hangman
         elsif guess.include? char
           puts "You already entered '#{char}'. Please enter another letter."
           puts 'Try again: ' + Graphics.obfuscate_word(word, guess)
+          puts 'Exit game with CTRL+C'
+
         elsif word.include? char
 
             guess << char
             placeholder = Graphics.obfuscate_word(word, guess)
 
             puts 'Whoop Whoop!! ' + placeholder
-
+            puts 'Exit game with CTRL+C'
 
           unless placeholder.include? Graphics::OBFUSCATION_CHAR
             Graphics.clear_screen
             5.times do
               puts Graphics::ALIVE
-              sleep(0.3)
+              sleep(0.2)
               Graphics.clear_screen
               puts Graphics::DANCEARM
-              sleep(0.3)
+              sleep(0.2)
               Graphics.clear_screen
               puts Graphics::BOTHARMS
-              sleep(0.3)
+              sleep(0.2)
               Graphics.clear_screen
             end
             puts Graphics::ALIVE
@@ -56,13 +65,13 @@ module Hangman
             @wrong_tries = @wrong_tries + 1
             guess << char
 
-
           if wrong_tries == chances
             puts Graphics::DEAD
             puts "\nARRRRGGGGGGGGGGG YOU LOST! 😭  😵  ☠️"
             break
           else
             puts 'Try another: ' + Graphics.obfuscate_word(word, guess)
+            puts 'Exit game with CTRL+C'
           end
         end
       end
